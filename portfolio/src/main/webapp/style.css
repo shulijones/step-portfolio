@@ -1,12 +1,13 @@
-body, header {
+body, 
+header {
     font-family: lato;
 }
 
 #header {
     font-size: 200%;
-    background-color: #ADB5FE;
+    background-color: #adb5fe;
     border-radius: 10px;
-    border: thick solid #ADB5FE;
+    border: thick solid #adb5fe;
 }
 
 .header-text {
@@ -39,11 +40,13 @@ body, header {
   margin-top: 20px;
 }
 
-a:link, a:visited {
+a:link, 
+a:visited {
     color: black;
 }
 
-a:hover, a:active {
-    color: #0215C7
+a:hover, 
+a:active {
+    color: #0215c7
 }
 
