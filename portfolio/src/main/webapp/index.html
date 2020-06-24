@@ -7,15 +7,34 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
+
   <body>
+    
+    <!-- When updating this header, also update the flattened header.txt file, which feeds all other page headers.-->
     <div id="header">
         <p class="header-text"> Shuli Jones </p>
         <div id="navbar">
-            <a href='index.html' class="navlink">Home</a>
-            <a href='projects.html' class="navlink">Projects</a>
-            <a href='elsewhere.html' class="navlink">Elsewhere</a>
+            <a href="index.html" class="navlink">Home</a>
+
+            <div class="dropdown">
+              <a href="projects.html" class="navlink">Projects</a>
+              <div class="dropdown-list">
+                <a href="projects.html#task-manager">Task Manager</a>
+                <a href="projects.html#matching-alg">Matching Algorithm </a>
+                <a href="projects.html#loft">Loft Bed</a>
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <a href="elsewhere.html" class="navlink">Elsewhere</a>
+              <div class="dropdown-list">
+                <a href="https://github.com/shulijones">GitHub</a>
+                <a href="https://mitadmissions.org/blogs/author/jonsh/">MIT Admissions</a>
+              </div>
+            </div>
         </div>
     </div>
+
     <div id="content">
       <h2>Shuli's Portfolio</h2>
       <p>Hi! Welcome to my STEP portfolio.</p>
@@ -23,9 +42,8 @@
           minoring in linguistics, and taking a whole lot of unrelated classes just for fun.
           I'm passionate about a lot of things: coding, colour-coding, Canadian spellings, cooking,
           languages, reading, planning, building... </p>
-      <p>
       <p>Here is a picture of my very small dog:</p>
-      <img src="/images/ella-1.JPG" 
+      <img src="images/ella-1.JPG" 
       alt="Ella, a small black Havanese, lying on the grass."
       width=300 height=400/>
       <p>Click here to get a random fact:</p>

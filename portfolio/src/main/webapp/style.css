@@ -1,12 +1,13 @@
-body, header {
+:root {
     font-family: lato;
 }
 
 #header {
     font-size: 200%;
-    background-color: #ADB5FE;
+    background-color: #adb5fe;
     border-radius: 10px;
-    border: thick solid #ADB5FE;
+    border: thick solid #adb5fe;
+    box-shadow: 0 3px 8px 2px rgba(0, 0, 0, 0.18);
 }
 
 .header-text {
@@ -19,31 +20,64 @@ body, header {
     display: inline-block;
     float: none;
     position: absolute;
-    left: 40%;
+    left: 35%;
     vertical-align: bottom;
     
 }
 
 .navlink {
-    padding: 10px;
+    padding: 15px;
     text-decoration: none;
+    vertical-align: top;
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+}
+
+.dropdown-list {
+    display: none;
+    position: absolute;
+    font-size: 75%;
+    margin-top: 10px;
+    margin-left: 20px;
+    width: max-content;
+}
+
+.dropdown-list a {
+    display: block;
+    text-decoration: none;
+}
+
+.dropdown:hover .dropdown-list,
+.dropdown:focus-within .dropdown-list {
+    display: block;
 }
 
 #content {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  padding-top: 30px;
+  width: 70%;
+}
+
+#content p {
+    font-size: 125%;
 }
 
 #fact-container {
   margin-top: 20px;
 }
 
-a:link, a:visited {
+a:link, 
+a:visited {
     color: black;
 }
 
-a:hover, a:active {
-    color: #0215C7
+a:hover, 
+a:active {
+    color: #0215c7
 }
 
