@@ -1,9 +1,49 @@
+body, header {
+    font-family: lato;
+}
+
+#header {
+    font-size: 200%;
+    background-color: #ADB5FE;
+    border-radius: 10px;
+    border: thick solid #ADB5FE;
+}
+
+.header-text {
+    display: inline;
+    padding: 10px;
+    font-weight: 700;
+}
+
+#navbar {
+    display: inline-block;
+    float: none;
+    position: absolute;
+    left: 40%;
+    vertical-align: bottom;
+    
+}
+
+.navlink {
+    padding: 10px;
+    text-decoration: none;
+}
+
 #content {
   margin-left: auto;
   margin-right: auto;
   width: 650px;
 }
 
-#greeting-container {
+#fact-container {
   margin-top: 20px;
 }
+
+a:link, a:visited {
+    color: black;
+}
+
+a:hover, a:active {
+    color: #0215C7
+}
+

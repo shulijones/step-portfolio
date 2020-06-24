@@ -13,16 +13,22 @@
 // limitations under the License.
 
 /**
- * Adds a random greeting to the page.
+ * Adds a random fact to the page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+function addRandomFact() {
+  const facts =
+      ['No one knows exactly how many languages there are, \
+      but the number is estimated to be between 6 and 8 thousand.',
+       'Tetris is NP-complete.', 
+       'The youngest person ever to swim across the English channel \
+       was a 17-year-old Canadian named Marilyn Bell.', 
+       'The first video ever played on MTV was the music video \
+       for the song "Video Killed the Radio Star", by the Buggles.'];
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  // Pick a random fact.
+  const fact = facts[Math.floor(Math.random() * facts.length)];
 
   // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+  const factContainer = document.getElementById('fact-container');
+  factContainer.innerText = fact;
 }
