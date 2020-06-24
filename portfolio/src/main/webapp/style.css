@@ -1,5 +1,4 @@
-body, 
-header {
+:root {
     font-family: lato;
 }
 
@@ -8,6 +7,7 @@ header {
     background-color: #adb5fe;
     border-radius: 10px;
     border: thick solid #adb5fe;
+    box-shadow: 0 3px 8px 2px rgba(0, 0, 0, 0.18);
 }
 
 .header-text {
@@ -20,20 +20,51 @@ header {
     display: inline-block;
     float: none;
     position: absolute;
-    left: 40%;
+    left: 35%;
     vertical-align: bottom;
     
 }
 
 .navlink {
-    padding: 10px;
+    padding: 15px;
     text-decoration: none;
+    vertical-align: top;
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+}
+
+.dropdown-list {
+    display: none;
+    position: absolute;
+    font-size: 75%;
+    margin-top: 10px;
+    margin-left: 20px;
+    width: max-content;
+}
+
+.dropdown-list a {
+    display: block;
+    text-decoration: none;
+}
+
+.dropdown:hover .dropdown-list,
+.dropdown:focus-within .dropdown-list {
+    display: block;
 }
 
 #content {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  padding-top: 30px;
+  width: 70%;
+}
+
+#content p {
+    font-size: 125%;
 }
 
 #fact-container {
