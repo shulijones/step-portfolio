@@ -1,59 +1,58 @@
 :root {
-    font-family: lato;
+  font-family: lato;
 }
 
 #header {
-    font-size: 200%;
-    background-color: #adb5fe;
-    border-radius: 10px;
-    border: thick solid #adb5fe;
-    box-shadow: 0 3px 8px 2px rgba(0, 0, 0, 0.18);
+  background-color: #adb5fe;
+  border: thick solid #adb5fe;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px 2px rgba(0, 0, 0, 0.18);
+  font-size: 200%;
 }
 
 .header-text {
-    display: inline;
-    padding: 10px;
-    font-weight: 700;
+  display: inline;
+  font-weight: 700;
+  padding: 10px;
 }
 
 #navbar {
-    display: inline-block;
-    float: none;
-    position: absolute;
-    left: 35%;
-    vertical-align: bottom;
-    
+  display: inline-block;
+  float: none;
+  left: 35%;
+  position: absolute;
+  vertical-align: bottom;
 }
 
 .navlink {
-    padding: 15px;
-    text-decoration: none;
-    vertical-align: top;
+  padding: 15px;
+  text-decoration: none;
+  vertical-align: top;
 }
 
 .dropdown {
-    display: inline-block;
-    position: relative;
-    vertical-align: top;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
 }
 
 .dropdown-list {
-    display: none;
-    position: absolute;
-    font-size: 75%;
-    margin-top: 10px;
-    margin-left: 20px;
-    width: max-content;
+  display: none;
+  font-size: 75%;
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 20px;
+  width: max-content;
 }
 
 .dropdown-list a {
-    display: block;
-    text-decoration: none;
+  display: block;
+  text-decoration: none;
 }
 
 .dropdown:hover .dropdown-list,
 .dropdown:focus-within .dropdown-list {
-    display: block;
+  display: block;
 }
 
 #content {
@@ -64,7 +63,7 @@
 }
 
 #content p {
-    font-size: 125%;
+  font-size: 125%;
 }
 
 #fact-container {
@@ -73,11 +72,11 @@
 
 a:link, 
 a:visited {
-    color: black;
+  color: black;
 }
 
 a:hover, 
 a:active {
-    color: #0215c7
+  color: #0215c7
 }
 
