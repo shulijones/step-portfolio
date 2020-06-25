@@ -62,6 +62,7 @@
   width: 70%;
 }
 
+#content a,
 #content p {
   font-size: 125%;
 }
@@ -75,8 +76,8 @@ a:visited {
   color: black;
 }
 
-a:hover, 
-a:active {
+a:active, 
+a:hover {
   color: #0215c7
 }
 

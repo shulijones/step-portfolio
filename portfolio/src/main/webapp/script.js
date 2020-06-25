@@ -13,6 +13,31 @@
 // limitations under the License.
 
 /**
+Sets the header for every page.
+ */
+function getHeader() {
+    document.getElementById("header").innerHTML += `<p class="header-text"> Shuli Jones </p>
+<div id="navbar">
+    <a href="index.html" class="navlink">Home</a> 
+    <div class="dropdown">
+        <a href="projects.html" class="navlink">Projects</a>
+        <div class="dropdown-list">
+            <a href="projects.html#task-manager">Task Manager</a>
+            <a href="projects.html#matching-alg">Matching Algorithm </a>
+            <a href="projects.html#loft">Loft Bed</a>
+        </div>
+    </div> 
+    <div class="dropdown">
+        <a href="elsewhere.html" class="navlink">Elsewhere</a>
+        <div class="dropdown-list">
+            <a href="https://github.com/shulijones">GitHub</a>
+            <a href="https://mitadmissions.org/blogs/author/jonsh/">MIT Admissions</a>
+        </div>
+    </div>
+</div>`
+}
+
+/**
  * Adds a random fact to the page.
  */
 function addRandomFact() {
