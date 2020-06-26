@@ -78,6 +78,13 @@ a:visited {
 
 a:active, 
 a:hover {
-  color: #0215c7
+  color: #0215c7;
+  font-weight: bold;
+}
+
+.more-info {
+  overflow: hidden;
+  transition: max-height ease-in-out 0.75s;
+  max-height: 0;
 }
 

@@ -18,10 +18,29 @@
     
     <div id="content">
       <h2> Projects </h2>
-      <p> Here are some projects I have worked on. [coming soon] </p>
-      <h3 id="task-manager"> Java Task Manager (in progress) </h3>
-      <h3 id="matching-alg"> Constrained Two-Sided Matching Algorithm (in progress) </h3>
-      <h3 id="loft"> Loft Bed </h3>
+      <p> Here are some projects I've worked on. [coming soon] </p>
+      <h3 id="task-manager" onclick="showMore('tm')"> Java Task Manager (in progress) ▼ </h3>
+      <p class="more-info" id="more-info--tm" onclick="showMore('tm')">
+          As a fun side project, I'm working on writing a task manager webapp in Java.
+          It's mostly to exercise my Java skills, but also because I feel like there's no
+          one perfect task manager that has the functionality I'd like. This is the very
+          beginning of an attempt at creating one.
+      </p>
+      <h3 id="matching-alg" onclick="showMore('ma')"> Constrained Two-Sided Matching Algorithm (in progress) ▼ </h3>
+      <p class="more-info" id="more-info--ma">This is for my dormitory. Every year, we have to house about a hundred new first-year
+        students, each on one of ten different floors. The new students and the old students both
+        have preferences about where they should end up. Over the past year, we've been working as 
+        a community to design an algorithm to best accommodate everyone's needs. I've just joined
+        the project this summer, so my first task is to clean up the codebase. Then we'll start
+        bughunting and innovating on the current solution.
+      </p>
+      <h3 id="loft" onclick="showMore('l')"> Loft Bed ▼ </h3>
+      <p class="more-info" id="more-info--l">I knew long before I moved into my dorm room last August that I would want a loft 
+        bed to help maximize the available floorspace. My dormitory lets students construct
+        their own, if they can do so safely, and provides a wood shop with most of the necessary
+        tools. So I went all in: designing, cutting, sanding, staining & varnishing to produce
+        a beautiful and very functional final product.
+      </p>
     </div>  
   </body>
 </html>
