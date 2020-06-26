@@ -40,10 +40,10 @@ function getHeader() {
 /**
  * Shows a section of hidden text (e.g. after a user clicks to indicate they want more information).
  * If the user clicks again, toggles to hide the text.
- * This only works when already on the page with the hidden text, not from another page.
+ * This only works when already on the page with the hidden text, not from another page (since then
+ * the element doesn't yet exist).
  */
 function showMore(text) {
-  console.log('starting showMore');
   var element = document.getElementById(`more-info--${text}`);
   
   if (element.style.maxHeight === '0px' || element.style.maxHeight === '') {
@@ -53,6 +53,8 @@ function showMore(text) {
   else {
     element.style.maxHeight = '0px';
   }
+  
+  
 }
 
 /**
@@ -63,6 +65,10 @@ function checkShowMore() {
   if (window.location.href.includes("#")) {
     showMore(window.location.href.split("#").pop());
   }
+
+  /*If the user got to the anchor via a dropdown, the focus is now on that dropdown link.
+  But it should be on the hidden text itself instead, so we'll move it. */
+  document.getElementById(text).focus();
 }
 
 /**
