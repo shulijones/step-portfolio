@@ -22,9 +22,9 @@ function getHeader() {
     <div class="dropdown">
         <a href="projects.html" class="navlink">Projects</a>
         <div class="dropdown-list">
-            <a href="projects.html#task-manager" onclick=showMore('tm')>Task Manager</a>
-            <a href="projects.html#matching-alg" onclick=showMore('ma')>Matching Algorithm </a>
-            <a href="projects.html#loft" onclick=showMore('l')>Loft Bed</a>
+            <a href="projects.html#tm" onclick="showMore('tm')">Task Manager</a>
+            <a href="projects.html#ma" onclick="showMore('ma')">Matching Algorithm </a>
+            <a href="projects.html#l" onclick="showMore('l')">Loft Bed</a>
         </div>
     </div> 
     <div class="dropdown">
@@ -43,6 +43,7 @@ function getHeader() {
  * This only works when already on the page with the hidden text, not from another page.
  */
 function showMore(text) {
+  console.log('starting showMore');
   var element = document.getElementById(`more-info--${text}`);
   
   if (element.style.maxHeight === '0px' || element.style.maxHeight === '') {
@@ -51,6 +52,16 @@ function showMore(text) {
   }
   else {
     element.style.maxHeight = '0px';
+  }
+}
+
+/**
+ * Checks if the user is at an anchor for a particular section of hidden text,
+ * and reveals it if they are.
+ */
+function checkShowMore() {
+  if (window.location.href.includes("#")) {
+    showMore(window.location.href.split("#").pop());
   }
 }
 
