@@ -30,8 +30,8 @@ function getHeader() {
     <div class="dropdown">
         <a href="elsewhere.html" class="navlink">Elsewhere</a>
         <div class="dropdown-list">
-            <a href="https://github.com/shulijones">GitHub</a>
-            <a href="https://mitadmissions.org/blogs/author/jonsh/">MIT Admissions</a>
+            <a href="https://github.com/shulijones" target="_blank">GitHub</a>
+            <a href="https://mitadmissions.org/blogs/author/jonsh/" target="_blank">MIT Admissions</a>
         </div>
     </div>
 </div>`;
