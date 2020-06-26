@@ -62,6 +62,7 @@
   width: 70%;
 }
 
+#content a,
 #content p {
   font-size: 125%;
 }
@@ -75,8 +76,15 @@ a:visited {
   color: black;
 }
 
-a:hover, 
-a:active {
-  color: #0215c7
+a:active, 
+a:hover {
+  color: #0215c7;
+  font-weight: bold;
+}
+
+.more-info {
+  overflow: hidden;
+  transition: max-height ease-in-out 0.75s;
+  max-height: 0;
 }
 

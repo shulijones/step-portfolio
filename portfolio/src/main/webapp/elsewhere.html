@@ -5,12 +5,18 @@
     <title>Shuli Jones - STEP Portfolio</title>
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <script src="script.js"></script>
   </head>
 
   <body>
-    <!-- Header stored only in index.html for DRYness -->
-    <script language="javascript" type="text/javascript" src="header.txt"></script>
+    <!-- Header stored only in one place (script.js) for dryness -->
+    <div id="header">
+      <script> 
+        getHeader();  
+      </script>
+    </div>
+
     <div id="content">
       <h2> Elsewhere on the Internet </h2>
       <p> Here are some other places you can find me! </p>

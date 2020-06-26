@@ -13,7 +13,49 @@
 // limitations under the License.
 
 /**
- * Adds a random fact to the page.
+Sets the header for every page.
+ */
+function getHeader() {
+    document.getElementById("header").innerHTML += `<p class="header-text"> Shuli Jones </p>
+<div id="navbar">
+    <a href="index.html" class="navlink">Home</a> 
+    <div class="dropdown">
+        <a href="projects.html" class="navlink">Projects</a>
+        <div class="dropdown-list">
+            <a href="projects.html#task-manager" onclick=showMore('tm')>Task Manager</a>
+            <a href="projects.html#matching-alg" onclick=showMore('ma')>Matching Algorithm </a>
+            <a href="projects.html#loft" onclick=showMore('l')>Loft Bed</a>
+        </div>
+    </div> 
+    <div class="dropdown">
+        <a href="elsewhere.html" class="navlink">Elsewhere</a>
+        <div class="dropdown-list">
+            <a href="https://github.com/shulijones">GitHub</a>
+            <a href="https://mitadmissions.org/blogs/author/jonsh/">MIT Admissions</a>
+        </div>
+    </div>
+</div>`;
+}
+
+/**
+ * Shows a section of hidden text (e.g. after a user clicks to indicate they want more information).
+ * If the user clicks again, toggles to hide the text.
+ * This only works when already on the page with the hidden text, not from another page.
+ */
+function showMore(text) {
+  var element = document.getElementById(`more-info--${text}`);
+  
+  if (element.style.maxHeight === '0px' || element.style.maxHeight === '') {
+    element.style.maxHeight = '500px'; 
+    /* Magic number to get around the fact that you can't animate to auto */
+  }
+  else {
+    element.style.maxHeight = '0px';
+  }
+}
+
+/**
+ * Adds a random fact to the page. Deprecated.
  */
 function addRandomFact() {
   const facts =
