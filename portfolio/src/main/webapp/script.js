@@ -47,7 +47,7 @@ function showMore(text) {
   var element = document.getElementById(`more-info--${text}`);
   
   if (element.style.maxHeight === '0px' || element.style.maxHeight === '') {
-    element.style.maxHeight = '500px'; 
+    element.style.maxHeight = '300px'; 
     /* Magic number to get around the fact that you can't animate to auto */
   }
   else {
@@ -63,13 +63,26 @@ function showMore(text) {
  */
 function checkShowMore() {
   if (window.location.href.includes("#")) {
-    showMore(window.location.href.split("#").pop());
-  }
+    let text = window.location.href.split("#").pop()
+    showMore(text);
 
-  /*If the user got to the anchor via a dropdown, the focus is now on that dropdown link.
-  But it should be on the hidden text itself instead, so we'll move it. */
-  document.getElementById(text).focus();
+    /*If the user got to the anchor via a dropdown, the focus is now on that dropdown link.
+    But it should be on the hidden text itself instead, so we'll move it. */
+    document.getElementById(text).focus();
+  }
 }
+
+
+/* Make a note of when a user first presses tab. This indicates that they are a keyboard user
+rather than a mouse user, so we'll turn on the focus rings for them to see where the tab focus is. */
+function handleFirstTab(e) {
+    if (e.keyCode === 9) { // the "I am a keyboard user" key
+        document.body.classList.add('user-is-tabbing');
+        window.removeEventListener('keydown', handleFirstTab);
+    }
+}
+
+
 
 /**
  * Adds a random fact to the page. Deprecated.
