@@ -88,3 +88,15 @@ a:hover {
   max-height: 0;
 }
 
+/* Hide the focus outline if the user isn't using tabs to focus. */
+body:not(.user-is-tabbing) h3:focus,
+body:not(.user-is-tabbing) button:focus {
+  outline: none;
+}
+
+.more-button {
+  font: inherit;
+  font-size: inherit;
+  background: inherit;
+  border: inherit;
+}

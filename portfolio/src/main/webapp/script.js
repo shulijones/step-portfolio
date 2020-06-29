@@ -22,16 +22,16 @@ function getHeader() {
     <div class="dropdown">
         <a href="projects.html" class="navlink">Projects</a>
         <div class="dropdown-list">
-            <a href="projects.html#task-manager" onclick=showMore('tm')>Task Manager</a>
-            <a href="projects.html#matching-alg" onclick=showMore('ma')>Matching Algorithm </a>
-            <a href="projects.html#loft" onclick=showMore('l')>Loft Bed</a>
+            <a href="projects.html#tm" onclick="showMore('tm')">Task Manager</a>
+            <a href="projects.html#ma" onclick="showMore('ma')">Matching Algorithm </a>
+            <a href="projects.html#l" onclick="showMore('l')">Loft Bed</a>
         </div>
     </div> 
     <div class="dropdown">
         <a href="elsewhere.html" class="navlink">Elsewhere</a>
         <div class="dropdown-list">
-            <a href="https://github.com/shulijones">GitHub</a>
-            <a href="https://mitadmissions.org/blogs/author/jonsh/">MIT Admissions</a>
+            <a href="https://github.com/shulijones" target="_blank">GitHub</a>
+            <a href="https://mitadmissions.org/blogs/author/jonsh/" target="_blank">MIT Admissions</a>
         </div>
     </div>
 </div>`;
@@ -40,19 +40,49 @@ function getHeader() {
 /**
  * Shows a section of hidden text (e.g. after a user clicks to indicate they want more information).
  * If the user clicks again, toggles to hide the text.
- * This only works when already on the page with the hidden text, not from another page.
+ * This only works when already on the page with the hidden text, not from another page (since then
+ * the element doesn't yet exist).
  */
 function showMore(text) {
   var element = document.getElementById(`more-info--${text}`);
   
   if (element.style.maxHeight === '0px' || element.style.maxHeight === '') {
-    element.style.maxHeight = '500px'; 
+    element.style.maxHeight = '300px'; 
     /* Magic number to get around the fact that you can't animate to auto */
   }
   else {
     element.style.maxHeight = '0px';
   }
+  
+  
 }
+
+/**
+ * Checks if the user is at an anchor for a particular section of hidden text,
+ * and reveals it if they are.
+ */
+function checkShowMore() {
+  if (window.location.href.includes("#")) {
+    let text = window.location.href.split("#").pop()
+    showMore(text);
+
+    /*If the user got to the anchor via a dropdown, the focus is now on that dropdown link.
+    But it should be on the hidden text itself instead, so we'll move it. */
+    document.getElementById(text).focus();
+  }
+}
+
+
+/* Make a note of when a user first presses tab. This indicates that they are a keyboard user
+rather than a mouse user, so we'll turn on the focus rings for them to see where the tab focus is. */
+function handleFirstTab(e) {
+    if (e.keyCode === 9) { // the "I am a keyboard user" key
+        document.body.classList.add('user-is-tabbing');
+        window.removeEventListener('keydown', handleFirstTab);
+    }
+}
+
+
 
 /**
  * Adds a random fact to the page. Deprecated.
