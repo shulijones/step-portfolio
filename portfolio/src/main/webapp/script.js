@@ -53,8 +53,6 @@ function showMore(text) {
   else {
     element.style.maxHeight = '0px';
   }
-  
-  
 }
 
 /**
@@ -82,6 +80,10 @@ function handleFirstTab(e) {
     }
 }
 
+function getGreeting() {
+  fetch('/data').then(response => response.text()).then
+  (quote => {document.getElementById('greeting').innerText = quote;});
+}
 
 
 /**
