@@ -71,8 +71,10 @@ function checkShowMore() {
 }
 
 
-/* Make a note of when a user first presses tab. This indicates that they are a keyboard user
-rather than a mouse user, so we'll turn on the focus rings for them to see where the tab focus is. */
+/**
+ * Makes a note of when a user first presses tab. This indicates that they are a keyboard user
+ * rather than a mouse user, so we'll turn on the focus rings for them to see where the tab focus is. 
+ */
 function handleFirstTab(e) {
     if (e.keyCode === 9) { // the "I am a keyboard user" key
         document.body.classList.add('user-is-tabbing');
@@ -80,9 +82,12 @@ function handleFirstTab(e) {
     }
 }
 
-function getGreeting() {
-  fetch('/data').then(response => response.text()).then
-  (quote => {document.getElementById('greeting').innerText = quote;});
+/**
+ * Loads guest book comments.
+ */
+function getGuestBook() {
+  fetch('/data').then(response => response.json()).then
+  (comments => {document.getElementById('guest-book').innerText = comments;});
 }
 
 

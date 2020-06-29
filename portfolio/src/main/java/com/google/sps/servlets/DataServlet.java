@@ -19,14 +19,32 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.Gson;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  ArrayList<String> comments = new ArrayList<String>();
+  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    response.getWriter().println("Hello Shuli!");
+    Gson gson = new Gson();
+    response.getWriter().println(gson.toJson(comments));
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String comment = request.getParameter("text-input");
+    comments.add(comment);
+
+    response.setContentType("text/html");
+    Gson gson = new Gson();
+    response.getWriter().println(gson.toJson(comments));
+    response.sendRedirect("/index.html");
   }
 }
