@@ -9,7 +9,7 @@
     <script src="script.js"></script>
   </head>
 
-  <body>
+  <body onload="getGuestBook()">
     <!-- Header stored only in one place (script.js) for dryness -->
     <div id="header">
       <script> 
@@ -32,7 +32,14 @@
           alt="Ella, a small black Havanese, lying on the grass."
           width=300 height=300/>
     </div> 
-    <button onclick=getGreeting()>Test out Java servlet</button>
-    <div id=greeting></div> 
+    
+    <form action="/data" method="POST">
+      <p> Sign my guest book! </p>
+      <textarea name="text-input">message for me</textarea>
+      <br>
+      <input type="submit">
+    </form>
+    <div id="guest-book"></div> 
+    <br><br>
   </body>
 </html>
