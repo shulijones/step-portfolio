@@ -57,11 +57,7 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     long timestamp = System.currentTimeMillis();
     String comment = request.getParameter("text-input");
-    //comments.add(comment);
-
     response.setContentType("text/html");
-    Gson gson = new Gson();
-    //response.getWriter().println(gson.toJson(comments));
 
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("text", comment);
