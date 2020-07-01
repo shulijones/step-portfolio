@@ -49,7 +49,8 @@ function showMore(text) {
   
   if (element.style.maxHeight === '0px' || element.style.maxHeight === '') {
     element.style.maxHeight = '300px'; 
-    /* Magic number to get around the fact that you can't animate to auto */
+    /* Magic number to get around the fact that you can't animate 
+       height to move from 0 to auto; all elements have maxHeight < 300px */
   }
   else {
     element.style.maxHeight = '0px';
@@ -61,8 +62,8 @@ function showMore(text) {
  * and reveals it if they are.
  */
 function checkShowMore() {
-  if (window.location.href.includes("#")) {
-    let text = window.location.href.split("#").pop()
+  if (window.location.href.includes('#')) { /* At an anchor */
+    let text = window.location.href.split('#').pop() /* The anchor's name */
     showMore(text);
 
     /* If the user got to the anchor via a dropdown, the focus is now on that
@@ -82,6 +83,8 @@ function handleFirstTab(e) {
     if (e.keyCode === 9) { // the "I am a keyboard user" key
         document.body.classList.add('user-is-tabbing');
         window.removeEventListener('keydown', handleFirstTab);
+        /* Don't have to keep track of if they pressed tab anymore,
+           since we already know they're a keyboard user */
     }
 }
 
@@ -90,7 +93,7 @@ function handleFirstTab(e) {
  */
 function getGuestBook() {
   const guestBook = document.getElementById('guest-book-comments');
-  fetch("/data").then(response => response.json()).then((comments) => {
+  fetch('/data').then(response => response.json()).then((comments) => {
     comments.forEach((comment) => {
       guestBook.appendChild(createComment(comment));
       guestBook.appendChild(document.createElement('br')); 
@@ -105,20 +108,30 @@ function createComment(comment) {
   const commentText = document.createElement('p');
   const commentSignature = document.createElement('p');
   
-  commentHolder.className = "comment";
-  commentText.className = "message";
-  commentSignature.className = "signature";
+  commentHolder.className = 'comment';
+  commentText.className = 'message';
+  commentSignature.className = 'signature';
 
   commentText.innerText = comment.text; 
-
-  const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }) 
-  const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat 
-    .formatToParts(new Date(comment.timestamp) ) ;
-  commentSignature.innerText = `${comment.author}  (${month} ${day}, ${year})`;
+  commentSignature.innerText = comment.author + " (" + 
+    formatDate(comment.timestamp) + ")";
 
   commentHolder.appendChild(commentText);
   commentHolder.appendChild(commentSignature);
   return commentHolder;
+}
+
+/**
+ * Takes a date in epoch milliseconds and returns it in the string
+ * format MonthName DayNumber, YearNumber (e.g. 'January 1, 1970')
+ */
+function formatDate(epochDate) {
+  const dateTimeFormat = new Intl.DateTimeFormat('en', 
+    { year: 'numeric', month: 'long', day: 'numeric' }) 
+  const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat 
+    .formatToParts(new Date(epochDate) );
+  return `${month} ${day}, ${year}`;
+
 }
 
 /**
