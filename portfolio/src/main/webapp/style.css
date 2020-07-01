@@ -2,11 +2,13 @@
   font-family: lato;
 }
 
+/* Header */
+
 #header {
   background-color: #adb5fe;
   border: thick solid #adb5fe;
   border-radius: 10px;
-  box-shadow: 0 3px 8px 2px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 3px 8px 2px rgba(0, 0, 0, .18);
   font-size: 200%;
 }
 
@@ -29,6 +31,8 @@
   text-decoration: none;
   vertical-align: top;
 }
+
+/* Dropdown bar in navigation */
 
 .dropdown {
   display: inline-block;
@@ -55,6 +59,8 @@
   display: block;
 }
 
+/* Main text */
+
 #content {
   margin-left: auto;
   margin-right: auto;
@@ -67,30 +73,43 @@
   font-size: 125%;
 }
 
+a:link, 
+a:visited {
+  color: black;
+}
+
+a:active, 
+a:hover {
+  color: #0215c7;
+  font-weight: bold;
+}
+
+/* Guest book */
+
 #guest-book {
+  font-size: 125%;
   margin-left: auto;
   margin-right: auto;
   padding-top: 30px;
   width: 70%;
-  font-size: 125%;
 }
 
 #guest-book textarea,
 #guest-book input {
-  border-radius: 10px;
   border: 1px solid #b3b3b3;
-  padding: 10px;
+  border-radius: 10px;
   font-size: 100%;
+  padding: 10px;
 }
 
 #guest-book textarea[name=message] {
-  width: 70%;
   height: 60px;
+  width: 70%;
 }
 
 #guest-book textarea[name=name] {
-  width: 17%;
   height: 18px;
+  width: 17%;
 }
 
 #guest-book input {
@@ -111,21 +130,12 @@
   content: '  — '; /* two long spaces before em-dash */
 }
 
-a:link, 
-a:visited {
-  color: black;
-}
-
-a:active, 
-a:hover {
-  color: #0215c7;
-  font-weight: bold;
-}
+/* Hidden text dropdowns */
 
 .more-info {
-  overflow: hidden;
-  transition: max-height ease-in-out 0.75s;
   max-height: 0;
+  overflow: hidden;
+  transition: max-height ease-in-out .75s;
 }
 
 /* Hide the focus outline if the user isn't using tabs to focus. */
@@ -135,8 +145,8 @@ body:not(.user-is-tabbing) button:focus {
 }
 
 .more-button {
-  font: inherit;
-  font-size: inherit;
   background: inherit;
   border: inherit;
+  font: inherit;
+  font-size: inherit;
 }
