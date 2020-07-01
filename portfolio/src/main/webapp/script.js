@@ -110,7 +110,11 @@ function createComment(comment) {
   commentSignature.className = "signature";
 
   commentText.innerText = comment.text; 
-  commentSignature.innerText = `${comment.author}  (${comment.timestamp})`;
+
+  const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }) 
+  const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat 
+    .formatToParts(new Date(comment.timestamp) ) ;
+  commentSignature.innerText = `${comment.author}  (${month} ${day}, ${year})`;
 
   commentHolder.appendChild(commentText);
   commentHolder.appendChild(commentSignature);

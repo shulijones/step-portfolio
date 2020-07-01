@@ -1,13 +1,12 @@
 package com.google.sps.data;
-import java.time.LocalDate;
 
 // Public immutable class representing a comment on a website
 public class Comment {
   private final String text;
   private final String author;
-  private final String timestamp;
+  private final long timestamp;
 
-  public Comment(String text, String author, String timestamp) {
+  public Comment(String text, String author, long timestamp) {
     this.text = text;
     this.author = author;
     this.timestamp = timestamp;
@@ -21,7 +20,7 @@ public class Comment {
     return this.author;
   }
 
-  public String getTimestamp() {
+  public long getTimestamp() {
     return this.timestamp;
   }
 }

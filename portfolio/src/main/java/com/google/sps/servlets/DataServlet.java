@@ -30,9 +30,6 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.Comment;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
-import java.util.TimeZone;
 
 /** Servlet that handles comments data */
 @WebServlet("/data")
@@ -49,15 +46,9 @@ public class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
-      /* Convert the comment's timestamp (ms since Epoch) to a date (d/m/y) */
-      SimpleDateFormat sdf = new java.text.SimpleDateFormat("MMMM d, yyyy");
-      sdf.setTimeZone(java.util.TimeZone.getTimeZone(
-        TimeZone.getDefault().toString()));
-      String commentDate = sdf.format(
-        new Date((long)entity.getProperty("timestamp")));
-
       Comment comment = new Comment((String)entity.getProperty("text"),
-          (String)entity.getProperty("author"), commentDate);
+          (String)entity.getProperty("author"), 
+          (long)entity.getProperty("timestamp"));
       comments.add(comment);
     }
     
