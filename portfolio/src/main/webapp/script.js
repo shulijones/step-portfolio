@@ -113,15 +113,25 @@ function createComment(comment) {
   commentSignature.className = 'signature';
 
   commentText.innerText = comment.text; 
-
-  const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }) 
-  const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat 
-    .formatToParts(new Date(comment.timestamp) ) ;
-  commentSignature.innerText = `${comment.author}  (${month} ${day}, ${year})`;
+  commentSignature.innerText = comment.author + " (" + 
+    formatDate(comment.timestamp) + ")";
 
   commentHolder.appendChild(commentText);
   commentHolder.appendChild(commentSignature);
   return commentHolder;
+}
+
+/**
+ * Takes a date in epoch milliseconds and returns it in the string
+ * format MonthName DayNumber, YearNumber (e.g. 'January 1, 1970')
+ */
+function formatDate(epochDate) {
+  const dateTimeFormat = new Intl.DateTimeFormat('en', 
+    { year: 'numeric', month: 'long', day: 'numeric' }) 
+  const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat 
+    .formatToParts(new Date(epochDate) );
+  return `${month} ${day}, ${year}`;
+
 }
 
 /**
