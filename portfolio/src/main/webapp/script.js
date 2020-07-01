@@ -62,8 +62,8 @@ function showMore(text) {
  * and reveals it if they are.
  */
 function checkShowMore() {
-  if (window.location.href.includes("#")) { /* At an anchor */
-    let text = window.location.href.split("#").pop() /* The anchor's name */
+  if (window.location.href.includes('#')) { /* At an anchor */
+    let text = window.location.href.split('#').pop() /* The anchor's name */
     showMore(text);
 
     /* If the user got to the anchor via a dropdown, the focus is now on that
@@ -93,7 +93,7 @@ function handleFirstTab(e) {
  */
 function getGuestBook() {
   const guestBook = document.getElementById('guest-book-comments');
-  fetch("/data").then(response => response.json()).then((comments) => {
+  fetch('/data').then(response => response.json()).then((comments) => {
     comments.forEach((comment) => {
       guestBook.appendChild(createComment(comment));
       guestBook.appendChild(document.createElement('br')); 
@@ -108,9 +108,9 @@ function createComment(comment) {
   const commentText = document.createElement('p');
   const commentSignature = document.createElement('p');
   
-  commentHolder.className = "comment";
-  commentText.className = "message";
-  commentSignature.className = "signature";
+  commentHolder.className = 'comment';
+  commentText.className = 'message';
+  commentSignature.className = 'signature';
 
   commentText.innerText = comment.text; 
 

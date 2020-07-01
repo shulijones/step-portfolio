@@ -104,11 +104,11 @@
 
 .message::before,
 .message::after {
-  content: "\"";
+  content: '\"';
 }
 
 .signature::before {
-  content: "  — "; /* two long spaces before em-dash */
+  content: '  — '; /* two long spaces before em-dash */
 }
 
 a:link, 
