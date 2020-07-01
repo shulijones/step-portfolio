@@ -67,8 +67,48 @@
   font-size: 125%;
 }
 
-#fact-container {
-  margin-top: 20px;
+#guest-book {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 30px;
+  width: 70%;
+  font-size: 125%;
+}
+
+#guest-book textarea,
+#guest-book input {
+  border-radius: 10px;
+  border: 1px solid #b3b3b3;
+  padding: 10px;
+  font-size: 100%;
+}
+
+#guest-book textarea[name=message] {
+  width: 70%;
+  height: 60px;
+}
+
+#guest-book textarea[name=name] {
+  width: 17%;
+  height: 18px;
+}
+
+#guest-book input {
+  background: white;
+  padding: 5px 10px;
+}
+
+#guest-book input:hover {
+  background: #c4c4c4;
+}
+
+.message::before,
+.message::after {
+  content: "\"";
+}
+
+.author::before {
+  content: "  — "; /*two long spaces before em-dash*/
 }
 
 a:link, 
