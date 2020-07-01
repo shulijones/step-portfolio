@@ -31,7 +31,6 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.Comment;
 
-
 /** Servlet that handles comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
@@ -45,6 +44,7 @@ public class DataServlet extends HttpServlet {
       "timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
+
     for (Entity entity : results.asIterable()) {
       Comment comment = new Comment((String)entity.getProperty("text"),
           (String)entity.getProperty("author"), 
