@@ -30,6 +30,9 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.Comment;
+import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZoneId;
 
 
 /** Servlet that handles comments data */
@@ -46,9 +49,13 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     for (Entity entity : results.asIterable()) {
+      /* Convert the comment's timestamp (ms since Epoch) to a date (d/m/y) */
+      LocalDate commentDate = Instant.ofEpochMilli(
+        (long)entity.getProperty("timestamp"))
+        .atZone(ZoneId.systemDefault()).toLocalDate();
+
       Comment comment = new Comment((String)entity.getProperty("text"),
-          (String)entity.getProperty("author"), 
-          (long)entity.getProperty("timestamp"));
+          (String)entity.getProperty("author"), commentDate);
       comments.add(comment);
     }
     

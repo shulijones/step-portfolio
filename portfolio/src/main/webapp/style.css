@@ -107,8 +107,8 @@
   content: "\"";
 }
 
-.author::before {
-  content: "  — "; /*two long spaces before em-dash*/
+.signature::before {
+  content: "  — "; /* two long spaces before em-dash */
 }
 
 a:link, 

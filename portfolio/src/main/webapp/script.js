@@ -65,7 +65,7 @@ function checkShowMore() {
     let text = window.location.href.split("#").pop()
     showMore(text);
 
-    /*If the user got to the anchor via a dropdown, the focus is now on that
+    /* If the user got to the anchor via a dropdown, the focus is now on that
     dropdown link. But it should be on the hidden text itself instead, so we'll 
     move it. */
     document.getElementById(text).focus();
@@ -92,25 +92,34 @@ function getGuestBook() {
   const guestBook = document.getElementById('guest-book-comments');
   fetch("/data").then(response => response.json()).then((comments) => {
     comments.forEach((comment) => {
-      const commentHolder = document.createElement('div');
-      const commentText = document.createElement('p');
-      const commentAuthor = document.createElement('p');
-      
-      commentHolder.className = "comment";
-      commentText.className = "message";
-      commentAuthor.className = "author";
-
-      commentText.innerText = comment.text; 
-      commentAuthor.innerText = comment.author;
-
-      commentHolder.appendChild(commentText);
-      commentHolder.appendChild(commentAuthor);
-      guestBook.appendChild(commentHolder);
-      guestBook.appendChild(document.createElement('br'));
+      guestBook.appendChild(createComment(comment));
+      guestBook.appendChild(document.createElement('br')); 
+        /* Add break before next comment - one extra at the end is actually
+        good, makes it easier to scroll down to read the last comment */
     });
   })
 }
 
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+    'July', 'August', 'September', 'October', 'November', 'December'];
+
+function createComment(comment) {
+  const commentHolder = document.createElement('div');
+  const commentText = document.createElement('p');
+  const commentSignature = document.createElement('p');
+  
+  commentHolder.className = "comment";
+  commentText.className = "message";
+  commentSignature.className = "signature";
+
+  commentText.innerText = comment.text; 
+  const commentDate = comment.timestamp;
+  commentSignature.innerText = `${comment.author}  (${months[commentDate.month-1]} ${commentDate.day}, ${commentDate.year})`;
+
+  commentHolder.appendChild(commentText);
+  commentHolder.appendChild(commentSignature);
+  return commentHolder;
+}
 
 /**
  * Adds a random fact to the page. Deprecated.
