@@ -100,9 +100,6 @@ function getGuestBook() {
   })
 }
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 
-    'July', 'August', 'September', 'October', 'November', 'December'];
-
 function createComment(comment) {
   const commentHolder = document.createElement('div');
   const commentText = document.createElement('p');
@@ -113,8 +110,7 @@ function createComment(comment) {
   commentSignature.className = "signature";
 
   commentText.innerText = comment.text; 
-  const commentDate = comment.timestamp;
-  commentSignature.innerText = `${comment.author}  (${months[commentDate.month-1]} ${commentDate.day}, ${commentDate.year})`;
+  commentSignature.innerText = `${comment.author}  (${comment.timestamp})`;
 
   commentHolder.appendChild(commentText);
   commentHolder.appendChild(commentSignature);

@@ -5,9 +5,9 @@ import java.time.LocalDate;
 public class Comment {
   private final String text;
   private final String author;
-  private final LocalDate timestamp;
+  private final String timestamp;
 
-  public Comment(String text, String author, LocalDate timestamp) {
+  public Comment(String text, String author, String timestamp) {
     this.text = text;
     this.author = author;
     this.timestamp = timestamp;
@@ -21,7 +21,7 @@ public class Comment {
     return this.author;
   }
 
-  public LocalDate getTimestamp() {
+  public String getTimestamp() {
     return this.timestamp;
   }
 }
