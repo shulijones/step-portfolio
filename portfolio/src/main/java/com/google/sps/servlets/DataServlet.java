@@ -35,20 +35,25 @@ import java.time.Instant;
 import java.time.ZoneId;
 
 
-/** Servlet that handles comments data */
-@WebServlet("/data")
+/** Servlet that handles guestbook comments */
+@WebServlet("/guestbook")
 public class DataServlet extends HttpServlet {
   
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
     ArrayList<Comment> comments = new ArrayList<Comment>();
+    final int maxComments = Integer.parseInt(
+      request.getParameter("maxcomments"));
 
     Query query = new Query("Comment").addSort(
       "timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     for (Entity entity : results.asIterable()) {
+      if (comments.size() == maxComments) {
+        break;
+      }
       /* Convert the comment's timestamp (ms since Epoch) to a date (d/m/y) */
       LocalDate commentDate = Instant.ofEpochMilli(
         (long)entity.getProperty("timestamp"))

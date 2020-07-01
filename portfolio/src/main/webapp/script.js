@@ -86,11 +86,15 @@ function handleFirstTab(e) {
 }
 
 /**
- * Loads guest book comments.
+ * Loads guest book comments. TODO: delete old comments on reload!
+ also quotation marks
+ also blank comments
  */
 function getGuestBook() {
   const guestBook = document.getElementById('guest-book-comments');
-  fetch("/data").then(response => response.json()).then((comments) => {
+  const maxComments = document.getElementById("comments-num").value;
+  fetch("/guestbook?maxcomments=" + maxComments.toString()).then(
+    response => response.json()).then((comments) => {
     comments.forEach((comment) => {
       guestBook.appendChild(createComment(comment));
       guestBook.appendChild(document.createElement('br')); 
