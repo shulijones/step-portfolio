@@ -20,9 +20,10 @@
     <div id="content">
       <h2>Shuli's Portfolio</h2>
       <p>Hi! Welcome to my STEP portfolio.</p>
-      <p>I'm Shuli Jones. I'm an incoming junior at MIT majoring in computer science,
-            minoring in linguistics, and taking a whole lot of unrelated classes just for fun.
-            I'm passionate about a lot of things: coding, colour-coding, Canadian spellings, cooking,
+      <p>I'm Shuli Jones. I'm an incoming junior at MIT majoring in computer 
+            science, minoring in linguistics, and taking a whole lot of 
+            unrelated classes just for fun. I'm passionate about a lot of 
+            things: coding, colour-coding, Canadian spellings, cooking, 
             languages, reading, planning, building... </p>
       <p>Here is a picture  of me, and one of my very small dog:</p>
       <img src="images/me.jpg"
@@ -33,13 +34,19 @@
           width=300 height=300/>
     </div> 
     
-    <form action="/data" method="POST">
-      <p> Sign my guest book! </p>
-      <textarea name="text-input">message for me</textarea>
+    <div id="guest-book">
+      <form action="/data" method="POST">
+        <h3> Sign my guest book! </h3>
+        <textarea name="name" maxlength=100 placeholder="Your name"></textarea>
+        <br>
+        <textarea name="message" maxlength=3000 placeholder="Message for me"></textarea>
+        <br>
+        <input type="submit">
+      </form>
       <br>
-      <input type="submit">
-    </form>
-    <div id="guest-book"></div> 
+      <h3>Past entries</h3>
+      <div id="guest-book-comments"></div> 
+    </div>
     <br><br>
   </body>
 </html>

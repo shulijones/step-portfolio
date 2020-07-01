@@ -31,7 +31,8 @@ function getHeader() {
         <a href="elsewhere.html" class="navlink">Elsewhere</a>
         <div class="dropdown-list">
             <a href="https://github.com/shulijones" target="_blank">GitHub</a>
-            <a href="https://mitadmissions.org/blogs/author/jonsh/" target="_blank">MIT Admissions</a>
+            <a href="https://mitadmissions.org/blogs/author/jonsh/"
+            target="_blank">MIT Admissions</a>
         </div>
     </div>
 </div>`;
@@ -40,8 +41,8 @@ function getHeader() {
 /**
  * Shows a section of hidden text (e.g. after a user clicks to indicate they want more information).
  * If the user clicks again, toggles to hide the text.
- * This only works when already on the page with the hidden text, not from another page (since then
- * the element doesn't yet exist).
+ * This only works when already on the page with the hidden text, not from 
+ another page (since then the element doesn't yet exist).
  */
 function showMore(text) {
   var element = document.getElementById(`more-info--${text}`);
@@ -64,16 +65,18 @@ function checkShowMore() {
     let text = window.location.href.split("#").pop()
     showMore(text);
 
-    /*If the user got to the anchor via a dropdown, the focus is now on that dropdown link.
-    But it should be on the hidden text itself instead, so we'll move it. */
+    /*If the user got to the anchor via a dropdown, the focus is now on that
+    dropdown link. But it should be on the hidden text itself instead, so we'll 
+    move it. */
     document.getElementById(text).focus();
   }
 }
 
 
 /**
- * Makes a note of when a user first presses tab. This indicates that they are a keyboard user
- * rather than a mouse user, so we'll turn on the focus rings for them to see where the tab focus is. 
+ * Makes a note of when a user first presses tab. This indicates that they are
+ * a keyboard user rather than a mouse user, so we'll turn on the focus rings 
+ * for them to see where the tab focus is. 
  */
 function handleFirstTab(e) {
     if (e.keyCode === 9) { // the "I am a keyboard user" key
@@ -86,8 +89,26 @@ function handleFirstTab(e) {
  * Loads guest book comments.
  */
 function getGuestBook() {
-  fetch('/data').then(response => response.json()).then
-  (comments => {document.getElementById('guest-book').innerText = comments;});
+  const guestBook = document.getElementById('guest-book-comments');
+  fetch("/data").then(response => response.json()).then((comments) => {
+    comments.forEach((comment) => {
+      const commentHolder = document.createElement('div');
+      const commentText = document.createElement('p');
+      const commentAuthor = document.createElement('p');
+      
+      commentHolder.className = "comment";
+      commentText.className = "message";
+      commentAuthor.className = "author";
+
+      commentText.innerText = comment.text; 
+      commentAuthor.innerText = comment.author;
+
+      commentHolder.appendChild(commentText);
+      commentHolder.appendChild(commentAuthor);
+      guestBook.appendChild(commentHolder);
+      guestBook.appendChild(document.createElement('br'));
+    });
+  })
 }
 
 
