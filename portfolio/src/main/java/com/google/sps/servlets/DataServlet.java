@@ -44,7 +44,7 @@ public class DataServlet extends HttpServlet {
     response.setContentType("text/html;");
     ArrayList<Comment> comments = new ArrayList<Comment>();
     final int maxComments = Integer.parseInt(
-      request.getParameter("maxcomments"));
+      request.getParameter("max-comments"));
 
     Query query = new Query("Comment").addSort(
       "timestamp", SortDirection.DESCENDING);
