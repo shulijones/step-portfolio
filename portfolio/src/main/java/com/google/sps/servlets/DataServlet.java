@@ -30,10 +30,6 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.Comment;
-import java.time.LocalDate;
-import java.time.Instant;
-import java.time.ZoneId;
-
 
 /** Servlet that handles guestbook comments */
 @WebServlet("/guestbook")
@@ -50,17 +46,15 @@ public class DataServlet extends HttpServlet {
       "timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
+    
     for (Entity entity : results.asIterable()) {
       if (comments.size() == maxComments) {
         break;
       }
-      /* Convert the comment's timestamp (ms since Epoch) to a date (d/m/y) */
-      LocalDate commentDate = Instant.ofEpochMilli(
-        (long)entity.getProperty("timestamp"))
-        .atZone(ZoneId.systemDefault()).toLocalDate();
-
+      
       Comment comment = new Comment((String)entity.getProperty("text"),
-          (String)entity.getProperty("author"), commentDate);
+          (String)entity.getProperty("author"), 
+          (long)entity.getProperty("timestamp"));
       comments.add(comment);
     }
     
