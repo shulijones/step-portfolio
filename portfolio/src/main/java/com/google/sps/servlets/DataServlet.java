@@ -31,21 +31,27 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.Comment;
 
-/** Servlet that handles comments data */
-@WebServlet("/data")
+/** Servlet that handles guestbook comments */
+@WebServlet("/guestbook")
 public class DataServlet extends HttpServlet {
   
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
     ArrayList<Comment> comments = new ArrayList<Comment>();
+    final int maxComments = Integer.parseInt(
+      request.getParameter("max-comments"));
 
     Query query = new Query("Comment").addSort(
       "timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-
+    
     for (Entity entity : results.asIterable()) {
+      if (comments.size() == maxComments) {
+        break;
+      }
+      
       Comment comment = new Comment((String)entity.getProperty("text"),
           (String)entity.getProperty("author"), 
           (long)entity.getProperty("timestamp"));

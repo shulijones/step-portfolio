@@ -89,11 +89,16 @@ function handleFirstTab(e) {
 }
 
 /**
- * Loads guest book comments.
+ * Loads guest book comments. 
+ * TODO: standardize quotation marks; disallow blank comments
  */
 function getGuestBook() {
   const guestBook = document.getElementById('guest-book-comments');
-  fetch('/data').then(response => response.json()).then((comments) => {
+  guestBook.innerHTML= '' //Remove any pre-existing comments
+  const maxComments = document.getElementById('comments-num').value;
+  
+  fetch('/guestbook?max-comments=' + maxComments.toString()).then(
+  (comments) => {
     comments.forEach((comment) => {
       guestBook.appendChild(createComment(comment));
       guestBook.appendChild(document.createElement('br')); 
