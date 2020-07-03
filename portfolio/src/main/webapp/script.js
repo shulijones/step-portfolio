@@ -90,7 +90,7 @@ function handleFirstTab(e) {
 
 /**
  * Loads guest book comments. 
- * TODO: standardize quotation marks; disallow blank comments
+ * TODO: disallow blank comments, deal with weird unicode error
  */
 function getGuestBook() {
   const guestBook = document.getElementById('guest-book-comments');
@@ -98,7 +98,7 @@ function getGuestBook() {
   const maxComments = document.getElementById('comments-num').value;
   
   fetch('/guestbook?max-comments=' + maxComments.toString()).then(
-  (comments) => {
+  response => response.json()).then((comments) => {
     comments.forEach((comment) => {
       guestBook.appendChild(createComment(comment));
       guestBook.appendChild(document.createElement('br')); 
@@ -108,6 +108,9 @@ function getGuestBook() {
   })
 }
 
+/**
+ * Creates a guestbook comment in the form of an HTML div element.
+ */
 function createComment(comment) {
   const commentHolder = document.createElement('div');
   const commentText = document.createElement('p');
@@ -137,6 +140,25 @@ function formatDate(epochDate) {
     .formatToParts(new Date(epochDate) );
   return `${month} ${day}, ${year}`;
 
+}
+
+/**
+ * Deletes all guestbook comments from the website if the 
+ * correct password is entered.
+ */
+function deleteData() {
+  const enteredPassword = document.getElementById('password').value;
+  const requestURL = '/delete-data?password=' + enteredPassword;
+  const request = new Request(requestURL, {method: 'POST'});
+  
+  fetch(request).then((response) => response.json()).then((jsonResponse) => {
+    if (jsonResponse.success) {
+      document.getElementById("password-fail").innerText = '';
+      getGuestBook();
+    }
+    else {
+      document.getElementById("password-fail").innerText = jsonResponse.errorMessage;
+    }});
 }
 
 /**

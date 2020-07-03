@@ -127,7 +127,7 @@ a:hover {
 }
 
 .signature::before {
-  content: '  — '; /* two long spaces before em-dash */
+  content: "  — "; /* two long spaces before em-dash */
 }
 
 /* Hidden text dropdowns */

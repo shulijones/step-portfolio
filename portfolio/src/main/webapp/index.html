@@ -52,7 +52,14 @@
         <option value=15>15</option>
       </select>
       <br>
-      <div id="guest-book-comments"></div> 
+      <div id="guest-book-comments"></div>
+      <h3> Delete all guestbook comments </h3>
+      <form onsubmit="deleteData();return false"> <!-- Don't reload page after -->
+        <textarea name="password" id="password" maxlength=30 placeholder="Password"></textarea>
+        <br>
+        <input type="submit">
+      </form>
+      <div id="password-fail"></div>
     </div>
     <br><br>
   </body>
