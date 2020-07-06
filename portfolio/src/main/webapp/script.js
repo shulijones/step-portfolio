@@ -155,19 +155,19 @@ function deleteData() {
     if (response.ok) {
       passwordMessage.innerText = '';
       getGuestBook();
+      return;
     }
-    else {
-      response.json().then((jsonResponse) => {
-        if ('errorMessage' in jsonResponse) {
-          passwordMessage.innerText = jsonResponse.errorMessage; 
-        }
-        else {
-          passwordMessage.innerText = 
-            `Unknown error occurred:
-             ${response.status}: ${response.statusText}`;
-        }
-      });
-    }
+    //Otherwise: some error was returned
+    response.json().then((jsonResponse) => {
+      if ('errorMessage' in jsonResponse) {
+        passwordMessage.innerText = jsonResponse.errorMessage; 
+      }
+      else {
+        passwordMessage.innerText = 
+          `Unknown error occurred:
+            ${response.status}: ${response.statusText}`;
+      }
+    });
   });
 }
 
