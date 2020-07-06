@@ -163,7 +163,8 @@ function deleteData() {
         }
         else {
           passwordMessage.innerText = 
-            `Error ${response.status} occurred. Please try again.`;
+            `Unknown error occurred:
+             ${response.status}: ${response.statusText}`;
         }
       });
     }
