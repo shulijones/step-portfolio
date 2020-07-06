@@ -152,17 +152,20 @@ function deleteData() {
   
   fetch(request).then((response) => {
     const passwordMessage = document.getElementById("password-fail");
-    if (response.status === 403) {
-      response.json().then((jsonResponse) => {
-        passwordMessage.innerText = jsonResponse.errorMessage; 
-      });
-    }
-    else if (response.status === 200) {
+    if (response.ok) {
       passwordMessage.innerText = '';
       getGuestBook();
     }
     else {
-      passwordMessage.innerText = "An error occurred. Please try again.";
+      response.json().then((jsonResponse) => {
+        if ('errorMessage' in jsonResponse) {
+          passwordMessage.innerText = jsonResponse.errorMessage; 
+        }
+        else {
+          passwordMessage.innerText = 
+            `Error ${response.status} occurred. Please try again.`;
+        }
+      });
     }
   });
 }
