@@ -54,10 +54,9 @@
       <br>
       <div id="guest-book-comments"></div>
       <h3> Delete all guestbook comments </h3>
-      <form onsubmit="deleteData();return false"> <!-- Don't reload page after -->
-       <!--<label for="pwd">Password:</label>
-        <input type="password" id="pwd" name="pwd" onsubmit="deleteData();return false;"> onkeydown="if (event.keyCode == 13){deleteData();return false}" still reloads -->
-        <textarea name="password" id="password" maxlength="30" placeholder="Password"></textarea>
+      <form onsubmit="deleteData();return false;"> <!-- Don't reload page after -->
+       <label for="pwd">Password:</label>
+        <input type="password" id="pwd" name="pwd">
         <br>
         <input type="submit">
       </form>

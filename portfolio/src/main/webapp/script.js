@@ -146,7 +146,7 @@ function formatDate(epochDate) {
  * correct password is entered.
  */
 function deleteData() {
-  const enteredPassword = document.getElementById('password').value;
+  const enteredPassword = document.getElementById('pwd').value;
   const requestURL = '/delete-data?password=' + enteredPassword;
   const request = new Request(requestURL, {method: 'POST'});
   
