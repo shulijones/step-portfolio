@@ -151,15 +151,18 @@ function deleteData() {
   const request = new Request(requestURL, {method: 'POST'});
   
   fetch(request).then((response) => {
+    const passwordMessage = document.getElementById("password-fail");
     if (response.status === 403) {
       response.json().then((jsonResponse) => {
-        document.getElementById("password-fail").innerText = 
-          jsonResponse.errorMessage; 
+        passwordMessage.innerText = jsonResponse.errorMessage; 
       });
     }
-    else {
-      document.getElementById("password-fail").innerText = '';
+    else if (response.status === 200) {
+      passwordMessage.innerText = '';
       getGuestBook();
+    }
+    else {
+      passwordMessage.innerText = "An error occurred. Please try again.";
     }
   });
 }
