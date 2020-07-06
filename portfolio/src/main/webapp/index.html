@@ -37,9 +37,9 @@
     <div id="guest-book">
       <form action="/guestbook?maxcomments=5&lang=en" method="POST">
         <h3> Sign my guest book! </h3>
-        <textarea name="name" maxlength=100 placeholder="Your name"></textarea>
+        <textarea name="name" maxlength="100" placeholder="Your name" required></textarea>
         <br>
-        <textarea name="message" maxlength=3000 placeholder="Message for me"></textarea>
+        <textarea name="message" maxlength="3000" placeholder="Message for me" required></textarea>
         <br>
         <input type="submit">
       </form>
@@ -57,7 +57,15 @@
         <option value="es">Spanish</option>
       </select>
       <br>
-      <div id="guest-book-comments"></div> 
+      <div id="guest-book-comments"></div>
+      <h3> Delete all guestbook comments </h3>
+      <form onsubmit="deleteData();return false;"> <!-- Don't reload page after -->
+       <label for="pwd">Password:</label>
+        <input type="password" id="pwd" name="pwd">
+        <br>
+        <input type="submit">
+      </form>
+      <div id="password-fail"></div>
     </div>
     <br><br>
   </body>
