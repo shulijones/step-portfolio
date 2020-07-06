@@ -107,7 +107,8 @@ a:hover {
   width: 70%;
 }
 
-#guest-book textarea[name=name] {
+#guest-book textarea[name=name],
+#password {
   height: 18px;
   width: 17%;
 }
@@ -117,7 +118,7 @@ a:hover {
   padding: 5px 10px;
 }
 
-#guest-book input:hover {
+#guest-book input[type=submit]:hover {
   background: #c4c4c4;
 }
 
@@ -127,7 +128,7 @@ a:hover {
 }
 
 .signature::before {
-  content: '  — '; /* two long spaces before em-dash */
+  content: "  — "; /* two long spaces before em-dash */
 }
 
 /* Hidden text dropdowns */
