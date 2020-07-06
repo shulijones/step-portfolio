@@ -118,7 +118,7 @@ a:hover {
   padding: 5px 10px;
 }
 
-#guest-book input:hover {
+#guest-book input[type=submit]:hover {
   background: #c4c4c4;
 }
 

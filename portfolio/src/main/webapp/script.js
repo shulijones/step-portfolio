@@ -90,7 +90,6 @@ function handleFirstTab(e) {
 
 /**
  * Loads guest book comments. 
- * TODO: disallow blank comments, deal with weird unicode error
  */
 function getGuestBook() {
   const guestBook = document.getElementById('guest-book-comments');
