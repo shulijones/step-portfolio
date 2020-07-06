@@ -107,7 +107,8 @@ a:hover {
   width: 70%;
 }
 
-#guest-book textarea[name=name] {
+#guest-book textarea[name=name],
+#password {
   height: 18px;
   width: 17%;
 }
