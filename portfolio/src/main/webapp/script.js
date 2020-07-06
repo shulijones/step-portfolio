@@ -150,14 +150,18 @@ function deleteData() {
   const requestURL = '/delete-data?password=' + enteredPassword;
   const request = new Request(requestURL, {method: 'POST'});
   
-  fetch(request).then((response) => response.json()).then((jsonResponse) => {
-    if (jsonResponse.success) {
+  fetch(request).then((response) => {
+    if (response.status === 403) {
+      response.json().then((jsonResponse) => {
+        document.getElementById("password-fail").innerText = 
+          jsonResponse.errorMessage; 
+      });
+    }
+    else {
       document.getElementById("password-fail").innerText = '';
       getGuestBook();
     }
-    else {
-      document.getElementById("password-fail").innerText = jsonResponse.errorMessage;
-    }});
+  });
 }
 
 /**

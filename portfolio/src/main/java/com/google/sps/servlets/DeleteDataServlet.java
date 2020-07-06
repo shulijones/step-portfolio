@@ -21,11 +21,10 @@ public class DeleteDataServlet extends HttpServlet {
     JsonObject jsonResponse = new JsonObject();
 
     if (!password.equals("shuli-super-secret-password")) {
-      jsonResponse.addProperty("success", false);
       jsonResponse.addProperty("errorMessage", "Incorrect password.");
+      response.setStatus(HttpServletResponse.SC_FORBIDDEN);
     }
     else {
-      jsonResponse.addProperty("success", true);
       response.setStatus(HttpServletResponse.SC_OK);
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       Query query = new Query("Comment");
