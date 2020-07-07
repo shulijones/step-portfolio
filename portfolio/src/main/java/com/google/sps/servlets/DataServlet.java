@@ -61,9 +61,11 @@ public class DataServlet extends HttpServlet {
       }
       /* Convert its message to the requested langauge */
       Translation translation =
-        translate.translate((String)entity.getProperty("text"), 
-        Translate.TranslateOption.targetLanguage(lang));
+          translate.translate((String)entity.getProperty("text"), 
+          Translate.TranslateOption.targetLanguage(lang),
+          Translate.TranslateOption.format("text"));
       String translatedMessage = translation.getTranslatedText();
+      
       Comment comment = new Comment(translatedMessage,
           (String)entity.getProperty("author"), 
           (long)entity.getProperty("timestamp"));
