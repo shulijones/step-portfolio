@@ -101,7 +101,7 @@ function getGuestBook() {
 
   fetch(url).then(response => response.json()).then((comments) => {
     comments.forEach((comment) => {
-      guestBook.appendChild(createComment(comment));
+      guestBook.appendChild(createComment(comment, lang));
       guestBook.appendChild(document.createElement('br')); 
         /* Add break before next comment - one extra at the end is actually
         good, makes it easier to scroll down to read the last comment */
@@ -112,7 +112,7 @@ function getGuestBook() {
 /**
  * Creates a guestbook comment in the form of an HTML div element.
  */
-function createComment(comment) {
+function createComment(comment, lang) {
   const commentHolder = document.createElement('div');
   const commentText = document.createElement('p');
   const commentSignature = document.createElement('p');
@@ -123,7 +123,7 @@ function createComment(comment) {
 
   commentText.innerText = comment.text; 
   commentSignature.innerText = comment.author + " (" + 
-    formatDate(comment.timestamp) + ")";
+    formatDate(comment.timestamp, lang) + ")";
 
   commentHolder.appendChild(commentText);
   commentHolder.appendChild(commentSignature);
@@ -134,8 +134,8 @@ function createComment(comment) {
  * Takes a date in epoch milliseconds and returns it in the string
  * format MonthName DayNumber, YearNumber (e.g. 'January 1, 1970')
  */
-function formatDate(epochDate) {
-  const dateTimeFormat = new Intl.DateTimeFormat('en', 
+function formatDate(epochDate, lang) {
+  const dateTimeFormat = new Intl.DateTimeFormat(lang, 
     { year: 'numeric', month: 'long', day: 'numeric' }) 
   const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat 
     .formatToParts(new Date(epochDate) );
