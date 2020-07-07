@@ -123,7 +123,7 @@ function createComment(comment, lang) {
 
   commentText.innerText = comment.text; 
   commentSignature.innerText = comment.author + " (" + 
-    formatDate(comment.timestamp, lang) + ")";
+    formatAndTranslateDate(comment.timestamp, lang) + ")";
 
   commentHolder.appendChild(commentText);
   commentHolder.appendChild(commentSignature);
@@ -132,17 +132,18 @@ function createComment(comment, lang) {
 
 /**
  * Takes a date in epoch milliseconds and returns it in the string
- * format MonthName DayNumber, YearNumber (e.g. 'January 1, 1970')
+ * format MonthName DayNumber, YearNumber (e.g. 'January 1, 1970'),
+ * where the month name has been translated into the language lang.
+ * lang should be a two-letter ISO 639 code.
  */
-function formatDate(epochDate, lang) {
+function formatAndTranslateDate(epochDate, lang) {
   const dateTimeFormat = new Intl.DateTimeFormat(lang, 
     { year: 'numeric', month: 'long', day: 'numeric' }) 
   const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat 
     .formatToParts(new Date(epochDate) );
   return `${month} ${day}, ${year}`;
-
 }
-
+c
 /**
  * Deletes all guestbook comments from the website if the 
  * correct password is entered.
