@@ -30,6 +30,12 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.Comment;
+import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZoneId;
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
 
 /** Servlet that handles guestbook comments */
 @WebServlet("/guestbook")
@@ -37,22 +43,28 @@ public class DataServlet extends HttpServlet {
   
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
+    response.setContentType("text/html;charset=UTF-8;");
     ArrayList<Comment> comments = new ArrayList<Comment>();
     final int maxComments = Integer.parseInt(
       request.getParameter("max-comments"));
+    final String lang = request.getParameter("lang");
 
     Query query = new Query("Comment").addSort(
       "timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
+    Translate translate = TranslateOptions.getDefaultInstance().getService();
     
     for (Entity entity : results.asIterable()) {
       if (comments.size() == maxComments) {
         break;
       }
-      
-      Comment comment = new Comment((String)entity.getProperty("text"),
+      /* Convert its message to the requested langauge */
+      Translation translation =
+        translate.translate((String)entity.getProperty("text"), 
+        Translate.TranslateOption.targetLanguage(lang));
+      String translatedMessage = translation.getTranslatedText();
+      Comment comment = new Comment(translatedMessage,
           (String)entity.getProperty("author"), 
           (long)entity.getProperty("timestamp"));
       comments.add(comment);
@@ -77,6 +89,5 @@ public class DataServlet extends HttpServlet {
     datastore.put(commentEntity);
 
     response.sendRedirect("/index.html");
-
   }
 }

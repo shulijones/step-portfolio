@@ -95,9 +95,11 @@ function getGuestBook() {
   const guestBook = document.getElementById('guest-book-comments');
   guestBook.innerHTML= '' //Remove any pre-existing comments
   const maxComments = document.getElementById('comments-num').value;
-  
-  fetch('/guestbook?max-comments=' + maxComments.toString()).then(
-  response => response.json()).then((comments) => {
+  const lang = document.getElementById('language').value;
+  const url = '/guestbook?max-comments=' + maxComments.toString() +
+    '&lang='  + lang;
+
+  fetch(url).then(response => response.json()).then((comments) => {
     comments.forEach((comment) => {
       guestBook.appendChild(createComment(comment));
       guestBook.appendChild(document.createElement('br')); 
