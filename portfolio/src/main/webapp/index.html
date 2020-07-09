@@ -9,7 +9,7 @@
     <script src="script.js"></script>
   </head>
 
-  <body onload="getGuestBook()">
+  <body onload="getGuestBook();loadBlobstoreAndForm()">
     <!-- Header stored only in one place (script.js) for dryness -->
     <div id="header">
       <script> 
@@ -40,6 +40,16 @@
         <textarea name="name" maxlength="100" placeholder="Your name" required></textarea>
         <br>
         <textarea name="message" maxlength="3000" placeholder="Message for me" required></textarea>
+        <br>
+        <input type="submit">
+      </form>
+      <br>
+      <form id="image-submit" class="hidden" method="POST" enctype="multipart/form-data">
+        <label for="guestbook-pics">Send in a fun picture, if you'd like!</label>
+        <br>
+        <input type=file name="image" id="guestbook-pics" required>
+        <br>
+        <textarea name="name" maxlength="100" placeholder="Your name" required></textarea>
         <br>
         <input type="submit">
       </form>
