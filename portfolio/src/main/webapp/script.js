@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/******
+ *** Basic Page Style/CSS-Related Functions
+ *****/
+
 /**
 Sets the header for every page.
  */
@@ -88,10 +92,22 @@ function handleFirstTab(e) {
     }
 }
 
+/******
+ *** Guestbook-Related Functions
+ *****/
+
 /**
- * Loads guest book comments. 
+ * Loads the guest book comments and images. 
  */
 function getGuestBook() {
+  getGuestBookComments();
+  getGuestBookImages();
+}
+
+/**
+ * Loads the guest book comments from Datastore.
+ */
+function getGuestBookComments() {
   const guestBook = document.getElementById('guest-book-comments');
   guestBook.innerHTML= '' //Remove any pre-existing comments
   const maxComments = document.getElementById('comments-num').value;
@@ -106,6 +122,29 @@ function getGuestBook() {
         /* Add break before next comment - one extra at the end is actually
         good, makes it easier to scroll down to read the last comment */
     });
+  })
+}
+
+/**
+ * Loads the guest book images from Datastore and displays them using Blobstore.
+ */
+function getGuestBookImages() {
+  const guestBook = document.getElementById('guest-book-images');
+  guestBook.innerHTML= '' //Remove any pre-existing images
+
+  fetch("/image-handler").then(response => response.json())
+  .then((images) => { 
+    images.forEach((image) => {
+      const imageHtml = document.createElement('img');
+      const author = document.createElement('p');
+
+      imageHtml.src = "/image-server?blob-key=" + image.blobKey;
+      imageHtml.width = 300;
+      author.innerText = "Submitted by " + image.author;
+      guestBook.appendChild(imageHtml);
+      guestBook.appendChild(author);
+      guestBook.appendChild(document.createElement('br'));
+    }); 
   })
 }
 

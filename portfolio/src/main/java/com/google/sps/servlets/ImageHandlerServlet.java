@@ -21,12 +21,42 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.sps.data.Image;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.Gson;
 
 /**
  * Servlet to process image upload requests using the URL that Blobstore gives.
  */
 @WebServlet("/image-handler")
 public class ImageHandlerServlet extends HttpServlet {
+
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    response.setContentType("text/html;charset=UTF-8;");
+    ArrayList<Image> images = new ArrayList<Image>();
+
+    Query query = new Query("Image").addSort(
+      "timestamp", SortDirection.DESCENDING);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+    
+    for (Entity entity : results.asIterable()) {
+      Image image = new Image((String)entity.getProperty("blobKey"),
+          (String)entity.getProperty("author"), 
+          (long)entity.getProperty("timestamp"));
+      images.add(image);
+    }
+    
+    Gson gson = new Gson();
+    response.getWriter().println(gson.toJson(images));
+  }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
