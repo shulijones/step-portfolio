@@ -36,7 +36,7 @@ public class ImageHandlerServlet extends HttpServlet {
     // Store image in datastore (with its blob key for re-access later)
     Entity imageEntity = new Entity("Image");
     imageEntity.setProperty("blobKey", blobKey);
-    imageEntity.setProperty("author", ""); //TODO
+    imageEntity.setProperty("author", request.getParameter("name"));
     imageEntity.setProperty("timestamp", timestamp);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(imageEntity);
