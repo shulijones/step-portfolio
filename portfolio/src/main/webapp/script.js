@@ -143,7 +143,7 @@ function formatAndTranslateDate(epochDate, lang) {
     .formatToParts(new Date(epochDate) );
   return `${month} ${day}, ${year}`;
 }
-c
+
 /**
  * Deletes all guestbook comments from the website if the 
  * correct password is entered.
@@ -172,6 +172,20 @@ function deleteData() {
       }
     });
   });
+}
+
+/**
+ * Loads the blobstore image storage and shows the form to submit an image.
+ */
+function loadBlobstoreAndForm() {
+  fetch('/blobstore-upload-url')
+      .then((response) => response.text())
+      .then((uploadUrl) => { 
+        const messageForm = document.getElementById('image-submit');
+        //Make it so that submitting the image form will redirect to Blobstore's upload URL
+        messageForm.action = uploadUrl; 
+        messageForm.classList.remove('hidden'); //Show image form now that it's ready
+      });
 }
 
 /**
