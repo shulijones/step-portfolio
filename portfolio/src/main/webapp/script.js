@@ -179,13 +179,12 @@ function deleteData() {
  */
 function loadBlobstoreAndForm() {
   fetch('/blobstore-upload-url')
-      .then((response) => {
-        return response.text();
-      })
-      .then((imageUploadUrl) => {
+      .then((response) => response.text())
+      .then((uploadUrl) => { 
         const messageForm = document.getElementById('image-submit');
-        messageForm.action = imageUploadUrl;
-        messageForm.classList.remove('hidden');
+        //Make it so that submitting the image form will redirect to Blobstore's upload URL
+        messageForm.action = uploadUrl; 
+        messageForm.classList.remove('hidden'); //Show image form now that it's ready
       });
 }
 

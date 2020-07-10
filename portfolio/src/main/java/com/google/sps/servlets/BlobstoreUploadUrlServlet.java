@@ -18,6 +18,9 @@ public class BlobstoreUploadUrlServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     BlobstoreService blobstoreService = 
         BlobstoreServiceFactory.getBlobstoreService();
+    // We link the upload URL Blobstore generates to /image-handler so that 
+    // whenever a blob is sent to the URL, after Blobstore processes it,
+    // it will redirect to /image-handler so we can save it in Datastore
     String uploadUrl = blobstoreService.createUploadUrl("/image-handler");
 
     response.setContentType("text/html");

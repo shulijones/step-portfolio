@@ -31,11 +31,11 @@ public class ImageHandlerServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     long timestamp = System.currentTimeMillis();
-    String imageUrl = getUploadedFileUrl(request, "image");
+    String blobKey = getUploadedFileKey(request);
 
-    // Store image in datastore
+    // Store image in datastore (with its blob key for re-access later)
     Entity imageEntity = new Entity("Image");
-    imageEntity.setProperty("imageUrl", imageUrl);
+    imageEntity.setProperty("blobKey", blobKey);
     imageEntity.setProperty("author", ""); //TODO
     imageEntity.setProperty("timestamp", timestamp);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -44,41 +44,40 @@ public class ImageHandlerServlet extends HttpServlet {
     response.sendRedirect("/index.html");
   }
 
-  /** Returns a URL that points to the uploaded file, or null if the user didn't upload a file. */
-  private String getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
-    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+  /** Returns the blobstore key to access the uploaded file, or null if the 
+  user didn't upload a file. The file can be re-accessed later by sending a GET 
+  request to ImageServerServlet with that key as a parameter. */
+  private String getUploadedFileKey(HttpServletRequest request) {
+    
+    // Uploading the file has already sent it to blobstore, so now we want to 
+    // retrieve the contents of blobstore
+    BlobstoreService blobstoreService =       
+        BlobstoreServiceFactory.getBlobstoreService();
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
+    // Specifically, we want all the objects it contains of type image
     List<BlobKey> blobKeys = blobs.get("image");
 
-    // User submitted form without selecting a file, so we can't get a URL. (dev server)
+    // User submitted form without selecting a file, so we have no images (dev server)
     if (blobKeys == null || blobKeys.isEmpty()) { 
       return null; 
     }
 
-    // index.html only contains a single file input, so get the first index.
+    // There's only one image input in index.html, so the first blob
+    // will be the one we want
     BlobKey blobKey = blobKeys.get(0);
 
-    // User submitted form without selecting a file, so we can't get a URL. (live server)
+    // User submitted form without selecting a file, so there is no image saved 
+    // at that key (live server)
     BlobInfo blobInfo = new BlobInfoFactory().loadBlobInfo(blobKey);
     if (blobInfo.getSize() == 0) {
       blobstoreService.delete(blobKey);
       return null;
     }
 
-    // TODO: check the validity of the file here, e.g. to make sure it's an image file
+    // TODO: check the validity of the file here to make sure it's an image file
     // https://stackoverflow.com/q/10779564/873165
 
-    // Use ImagesService to get a URL that points to the uploaded file.
-    ImagesService imagesService = ImagesServiceFactory.getImagesService();
-    ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
-
-    // Get relative path to the image rather than the original one,
-    // which names a specific host.
-    try {
-      URL url = new URL(imagesService.getServingUrl(options));
-      return url.getPath();
-    } catch (MalformedURLException e) {
-      return imagesService.getServingUrl(options);
-    }
+    // Finally, we can just get the blob's key
+    return blobKeys.get(0).getKeyString();
   }
 }
