@@ -44,6 +44,7 @@
         <input type="submit">
       </form>
       <br>
+
       <form id="image-submit" class="hidden" method="POST" enctype="multipart/form-data">
         <label for="guestbook-pics">Send in a fun picture, if you'd like!</label>
         <br>
@@ -53,7 +54,11 @@
         <br>
         <input type="submit">
       </form>
+
+      <h3>Past images</h3>
+      <div id="guest-book-images"></div>
       <br>
+
       <h3>Past entries</h3>
       <label for="comments-num">How many entries?</label>
       <select name="comments-num" id="comments-num" onchange="getGuestBook()">
@@ -69,6 +74,7 @@
         <option value="es">Spanish</option>
       </select>
       <br>
+      
       <div id="guest-book-comments"></div>
       <h3> Delete all guestbook comments </h3>
       <form onsubmit="deleteData();return false;"> <!-- Don't reload page after -->

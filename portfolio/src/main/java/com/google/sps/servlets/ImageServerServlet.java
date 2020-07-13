@@ -9,8 +9,10 @@ import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 
+
 /**
  * Servlet that returns a Blobstore image based on its key.
+ * To access the image in HTML, set the src = /image-server?blob-key=...
  */
 @WebServlet("/image-server")
 public class ImageServerServlet extends HttpServlet {
@@ -21,8 +23,6 @@ public class ImageServerServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res)
         throws IOException {
             BlobKey blobKey = new BlobKey(req.getParameter("blob-key"));
-            // The serve request returns a special message telling AppEngine to 
-            // replace it with the blob (image) with this blobKey
             blobstoreService.serve(blobKey, res);
         }
 }
