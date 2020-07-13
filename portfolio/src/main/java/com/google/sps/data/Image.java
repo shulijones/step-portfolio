@@ -2,8 +2,8 @@ package com.google.sps.data;
 
 // Public immutable class representing an image uploaded to a website
 public class Image {
+  // The image can be accessed at "/image-handler?blob-key=${blobKey}
   private final String blobKey; 
-      //the image can be accessed at "/image-handler?blob-key=${blobKey}
   private final String author;
   private final long timestamp;
 
