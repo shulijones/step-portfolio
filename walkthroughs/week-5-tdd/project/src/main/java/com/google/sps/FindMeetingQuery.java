@@ -23,12 +23,31 @@ import java.util.List;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    ArrayList<String> attendees = new ArrayList<String>(request.getAttendees());
+    ArrayList<String> mandatoryAttendees = new ArrayList<String>(request.getAttendees());
+    ArrayList<String> optionalAttendees = new ArrayList<String>(request.getOptionalAttendees());
     long longDuration = request.getDuration();
-    ArrayList<TimeRange> possibleTimes = new ArrayList<TimeRange>();
+    
+    ArrayList<String> allAttendees = new ArrayList<String>(mandatoryAttendees);
+    allAttendees.addAll(optionalAttendees);
 
+    Collection<TimeRange> mandatoryTimeOptions = queryMandatoryAttendees(events, mandatoryAttendees, longDuration);
+    Collection<TimeRange> optionalTimeOptions = queryMandatoryAttendees(events, allAttendees, longDuration);
+
+    if (!optionalTimeOptions.isEmpty() || mandatoryAttendees.isEmpty()) { 
+      // We are able to find times that work for both groups of attendees
+      return optionalTimeOptions;
+    }
+    return mandatoryTimeOptions;
+  }
+
+  // Given a list of events, a list of attendees, and a meeting duration,
+  // return all possible times that a meeting of that duration can be held
+  // so that all attendees can be there.
+  private Collection<TimeRange> queryMandatoryAttendees(Collection<Event> events, Collection<String> attendees, long meetingDuration) {
+    ArrayList<TimeRange> possibleTimes = new ArrayList<TimeRange>();
+    
     // Check if meeting can fit within a day (otherwise impossible to hold it)
-    if (longDuration > TimeRange.WHOLE_DAY.duration()) {
+    if (meetingDuration > TimeRange.WHOLE_DAY.duration()) {
       return possibleTimes;
     }
     // No attendees, hold meeting anytime
@@ -37,8 +56,8 @@ public final class FindMeetingQuery {
       return possibleTimes;
     }
  
-    // Since we know longDuration is less than one day, it can fit in an int
-    int duration = (int)longDuration;
+    // Since we know meetingDuration is less than one day, it can fit in an int
+    int duration = (int)meetingDuration;
 
     // Filter events so that it only includes events that have one or more
     // attendees who are coming to this event
@@ -80,7 +99,6 @@ public final class FindMeetingQuery {
       }
       currentEvent = nextEvent;
     }
-
 
     // Lastly, see if we can have a meeting between the last event end and the end of the day
     if (TimeRange.END_OF_DAY - latestEnd >= duration) {
